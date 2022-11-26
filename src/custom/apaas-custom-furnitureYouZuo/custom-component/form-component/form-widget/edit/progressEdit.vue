@@ -254,14 +254,14 @@ export default {
 
 
     .el-step__title.is-finish {
-        font-family: 'PingFangSC-Regular';
+        font-family: 'PingFangSC-Medium';
         color: #333333;
         font-size: 12px;
         font-weight: normal;
     }
 
     .el-step__description.is-finish {
-        font-family: PingFangSC-Regular;
+        font-family: 'PingFangSC-Regular';
         font-size: 12px;
         font-weight: normal;
         /* 中性色/G8-次要文本 */
