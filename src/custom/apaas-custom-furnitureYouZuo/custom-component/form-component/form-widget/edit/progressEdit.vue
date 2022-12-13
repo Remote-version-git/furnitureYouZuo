@@ -1,40 +1,12 @@
 <template>
     <div class="progress-edit">
         <furniture-steps>
-            <furniture-step title="接单">
-                <template #desc>
-                    <p>提交时间：</p>
-                    <p>(取单据创建人)负责人：</p>
-                </template>
-            </furniture-step>
-            <furniture-step title="接单">
-                <template #desc>
-                    <p>提交时间：</p>
-                    <p>(取单据创建人)负责人：</p>
-                </template>
-            </furniture-step>
-            <furniture-step title="接单">
-                <template #desc>
-                    <p>提交时间：</p>
-                    <p>(取单据创建人)负责人：</p>
-                </template>
-            </furniture-step>
-            <furniture-step title="备产/采购" :childData="{ products: [], purchases: [] }">
-                <template #desc>
-                    <p>提交时间：</p>
-                    <p>(取单据创建人)负责人：</p>
-                </template>
-            </furniture-step>
-            <furniture-step title="接单">
-                <template #desc>
-                    <p>提交时间：</p>
-                    <p>(取单据创建人)负责人：</p>
-                </template>
-            </furniture-step>
-            <furniture-step title="接单" hiddenLine>
-                <template #desc>
-                    <p>提交时间：</p>
-                    <p>(取单据创建人)负责人：</p>
+            <furniture-step :hiddenLine="flowData.length === (i + 1)" v-for="item, i in flowData" :key="i" :data="item"
+                :title="item.nodeName"
+                :childData="item.subFlowData && item.subFlowData.length ? { products: [], purchases: item.subFlowData && item.subFlowData.length ? item.subFlowData[0] : [] } : undefined">
+                <template #desc="{ data }">
+                    <p>提交时间：{{ data.nodeDate }}</p>
+                    <p>{{ data.principal }}</p>
                 </template>
             </furniture-step>
         </furniture-steps>
@@ -85,66 +57,139 @@ const mock = {
             "nodeName": "创建",
             "lineCode": null,
             "status": null,
-            "nodeDate": "2022-11-28 10:22:04",
-            "principal": "负责人：林安琪13630114548",
+            "nodeDate": "2022-08-19",
+            "principal": "负责人：null",
             "dateDsc": "创建时间: ",
-            "list": null
+            "list": null,
+            "subFlowData": null
         },
         {
             "nodeName": "提交",
             "lineCode": null,
             "status": null,
-            "nodeDate": "2022-11-28 10:22:28",
-            "principal": "负责人：林安琪13630114548",
+            "nodeDate": "2022-07-02",
+            "principal": "负责人：null",
             "dateDsc": "提交时间：",
-            "list": null
+            "list": null,
+            "subFlowData": null
         },
         {
             "nodeName": "审核情况",
             "lineCode": null,
             "status": "自然关闭",
-            "nodeDate": "2022-11-28 10:22:31",
+            "nodeDate": "2022-08-22",
             "principal": "负责人：null",
             "dateDsc": "审核时间：",
             "list": [
                 {
                     "nodeName": "销售订单行",
-                    "lineCode": "1002304187436837",
+                    "lineCode": "10",
                     "status": "自然关闭",
-                    "nodeDate": "2022-11-28 16:00:00",
+                    "nodeDate": "2022-09-24",
                     "principal": null,
                     "dateDsc": null,
-                    "list": null
+                    "list": null,
+                    "subFlowData": null
                 }
+            ],
+            "subFlowData": null
+        },
+        {
+            "nodeName": "备产/采购",
+            "lineCode": null,
+            "status": null,
+            "nodeDate": null,
+            "principal": null,
+            "dateDsc": null,
+            "list": null,
+            "subFlowData": [
+                [
+                    {
+                        "nodeName": "采购订单",
+                        "lineCode": null,
+                        "status": "自然关闭",
+                        "nodeDate": "2022-08-22",
+                        "principal": "负责人：邓慧萍、欧认平",
+                        "dateDsc": "审核时间：",
+                        "list": [
+                            {
+                                "nodeName": "采购订单",
+                                "lineCode": "61-PO22082200046",
+                                "status": "已审核",
+                                "nodeDate": "2022-08-22",
+                                "principal": null,
+                                "dateDsc": null,
+                                "list": null,
+                                "subFlowData": null
+                            }
+                        ],
+                        "subFlowData": null
+                    },
+                    {
+                        "nodeName": "采购入库",
+                        "lineCode": null,
+                        "status": "已完成",
+                        "nodeDate": "2022-09-24",
+                        "principal": "负责人：邓慧萍、欧认平",
+                        "dateDsc": "审核时间：",
+                        "list": [
+                            {
+                                "nodeName": "采购",
+                                "lineCode": "61-PO22082200046",
+                                "status": "业务关闭",
+                                "nodeDate": "2022-09-24",
+                                "principal": null,
+                                "dateDsc": null,
+                                "list": null,
+                                "subFlowData": null
+                            }
+                        ],
+                        "subFlowData": null
+                    }
+                ]
             ]
         },
         {
             "nodeName": "出货计划",
             "lineCode": null,
-            "status": null,
-            "nodeDate": null,
+            "status": "全部认款",
+            "nodeDate": "2022-09-24",
             "principal": "负责人：刘秀珠",
-            "dateDsc": null,
-            "list": null
+            "dateDsc": "审核时间：",
+            "list": [
+                {
+                    "nodeName": "出货计划",
+                    "lineCode": "61-SH2209240067",
+                    "status": "全部认款",
+                    "nodeDate": "2022-09-24",
+                    "principal": null,
+                    "dateDsc": null,
+                    "list": null,
+                    "subFlowData": null
+                }
+            ],
+            "subFlowData": null
         },
         {
             "nodeName": "出货",
             "lineCode": null,
-            "status": null,
-            "nodeDate": "2022-11-28 10:26:23",
+            "status": "已核准",
+            "nodeDate": "2022-09-24",
             "principal": "负责人：精一西樵-程敏华、精一西庆-陈嘉敏",
             "dateDsc": "审核时间：",
             "list": [
                 {
                     "nodeName": "出库单",
-                    "lineCode": "10",
+                    "lineCode": "61-SH2209240067",
                     "status": "已核准",
-                    "nodeDate": "2022-11-28 10:26:23",
+                    "nodeDate": "2022-09-24",
                     "principal": null,
                     "dateDsc": null,
-                    "list": null
+                    "list": null,
+                    "subFlowData": null
                 }
-            ]
+            ],
+            "subFlowData": null
         },
         {
             "nodeName": "应收",
@@ -153,20 +198,22 @@ const mock = {
             "nodeDate": null,
             "principal": "负责人：李倩妮",
             "dateDsc": null,
-            "list": []
+            "list": [],
+            "subFlowData": null
         },
         {
             "nodeName": "关闭",
             "lineCode": null,
-            "status": "全部发货(自然关闭)",
+            "status": "",
             "nodeDate": null,
             "principal": null,
             "dateDsc": null,
-            "list": null
+            "list": null,
+            "subFlowData": null
         }
     ],
-    "requestid": "e2f2fc2b4c0943b082127cf184064fa3"
-};
+    "requestid": "b063c32ec057472297beea4559d17f97"
+}
 export default {
     name: 'ProgressEdit',
     props: ['orderCode', 'url',],
@@ -175,71 +222,72 @@ export default {
         FurnitureStep
     },
     created() {
-        // this.url = 'http://remote.frp.unbug.cc';
-        // this.orderCode = '147';
-        // this.$request({
-        //     method: 'get',
-        //     url: this.url + '/custom/crm/getOrderCurrentProgress',
-        //     params: {
-        //         orderCode: this.orderCode
-        //     }
-        // })
-        //     .asyncThen(res => {
-        const res = mock;
-        if (res.data) {
-            var list = [];
-            res.data.forEach((item, index) => {
-                if (this.finishStatus.indexOf(item.status) > -1) {
-                    item.checkStatus = 1;
-                }
-                else {
-                    item.checkStatus = 0;
+        this.url = 'http://cscrm.sitzone.cn:30611';
+        this.orderCode = '147';
+        this.$request({
+            method: 'get',
+            url: this.url + '/custom/crm/getOrderCurrentProgress',
+            params: {
+                orderCode: this.orderCode
+            }
+        })
+            .asyncThen(res => {
+                if (res.data) {
+                    this.flowData = res.data;
+                    var list = [];
+                    res.data.forEach((item, index) => {
+                        if (this.finishStatus.indexOf(item.status) > -1) {
+                            item.checkStatus = 1;
+                        }
+                        else {
+                            item.checkStatus = 0;
+                        }
+                    })
+                    let initNodes = [
+                        {
+                            title: '订单创建',
+                            desc: '订单创建',
+                            status: 'completed',
+                        },
+                        {
+                            title: '提交',
+                            desc: '业务员提交',
+                            status: 'completed',
+                        }];
+                    this.nodes = initNodes
+                    res.data.forEach((item, index) => {
+                        if (this.finishStatus.indexOf(item.status) > -1) {
+                            item.checkStatus = 'completed';
+                        }
+                        else if (this.waitStatus.indexOf(item.status) > -1) {
+                            item.checkStatus = 'active';
+                        }
+                        else {
+                            item.checkStatus = 'unactive';
+                        }
+                        let len = 0;
+                        if (item.list) {
+                            len = item.list.length;
+                        }
+                        var node = {
+                            title: item.nodeName,
+                            desc: item.nodeDate,
+                            status: item.checkStatus,
+                            statusName: item.status,
+                            children: item.list,
+                            length: len
+                        }
+                        this.nodes.push(node);
+                    });
+
+
+
                 }
             })
-            let initNodes = [
-                {
-                    title: '订单创建',
-                    desc: '订单创建',
-                    status: 'completed',
-                },
-                {
-                    title: '提交',
-                    desc: '业务员提交',
-                    status: 'completed',
-                }];
-            this.nodes = initNodes
-            res.data.forEach((item, index) => {
-                if (this.finishStatus.indexOf(item.status) > -1) {
-                    item.checkStatus = 'completed';
-                }
-                else if (this.waitStatus.indexOf(item.status) > -1) {
-                    item.checkStatus = 'active';
-                }
-                else {
-                    item.checkStatus = 'unactive';
-                }
-                let len = 0;
-                if (item.list) {
-                    len = item.list.length;
-                }
-                var node = {
-                    title: item.nodeName,
-                    desc: item.nodeDate,
-                    status: item.checkStatus,
-                    statusName: item.status,
-                    children: item.list,
-                    length: len
-                }
-                this.nodes.push(node);
-            });
-
-
-
-        }
-        // })
     },
     data() {
         return {
+            flowData: [],
             finishStatus: ["审核", "自然关闭", "短缺关闭", "已完成", "已核销", "月结客户", "完工", "已核准", "已认款"],
             waitStatus: ['审核中', '进行中', '部分认款', '部分核销'],
             orderStyle: {},

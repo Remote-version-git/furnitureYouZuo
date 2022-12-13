@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="apaas-custom-page-furnitureYouZuo custom-page">
-    <ProgressEdit></ProgressEdit>
+    <ProgressRead></ProgressRead>
     <div class="page-header">
       <div class="title">
         自开发界面
@@ -81,12 +81,12 @@ import SearchSelect from '../../common/search-components/search-select.vue'
 import DetailDrawer from './detail-drawer.vue'
 import EditModal from './edit-modal.vue'
 
-import ProgressEdit from '../custom-component/form-component/form-widget/edit/progressEdit.vue'
+import ProgressRead from '../custom-component/form-component/form-widget/read/progressRead.vue'
 
 export default {
   name: 'ApaasCustomFurnitureYouZuo',
   components: {
-    ProgressEdit,
+    ProgressRead,
     SearchInput,
     SearchDate,
     SearchNumber,
