@@ -111,11 +111,11 @@ export default {
         }
     },
     created() {
-        this.url = 'http://cscrm.sitzone.cn:30611';
-        this.orderCode = '8888';
+        // this.url = 'http://cscrm.sitzone.cn:30611';
+        // this.orderCode = '8888';
         this.$request({
             method: 'get',
-            url: this.url + '/custom/crm/getOrderCurrentProgress',
+            url: '/custom/crm/getOrderCurrentProgress',
             params: {
                 orderCode: this.orderCode
             }
@@ -160,52 +160,7 @@ export default {
                         statusName: item.status,
                         children: item.list,
                         length: len,
-                        subFlowData: item.subFlowData || [
-                            [
-                                {
-                                    "nodeName": "采购订单",
-                                    "lineCode": null,
-                                    "status": "自然关闭",
-                                    "nodeDate": "2022-08-22",
-                                    "principal": "负责人：邓慧萍、欧认平",
-                                    "dateDsc": "审核时间：",
-                                    "list": [
-                                        {
-                                            "nodeName": "采购订单",
-                                            "lineCode": "61-PO22082200046",
-                                            "status": "已审核",
-                                            "nodeDate": "2022-08-22",
-                                            "principal": null,
-                                            "dateDsc": null,
-                                            "list": null,
-                                            "subFlowData": null
-                                        }
-                                    ],
-                                    "subFlowData": null
-                                },
-                                {
-                                    "nodeName": "采购入库",
-                                    "lineCode": null,
-                                    "status": "已完成",
-                                    "nodeDate": "2022-09-24",
-                                    "principal": "负责人：邓慧萍、欧认平",
-                                    "dateDsc": "审核时间：",
-                                    "list": [
-                                        {
-                                            "nodeName": "采购",
-                                            "lineCode": "61-PO22082200046",
-                                            "status": "业务关闭",
-                                            "nodeDate": "2022-09-24",
-                                            "principal": null,
-                                            "dateDsc": null,
-                                            "list": null,
-                                            "subFlowData": null
-                                        }
-                                    ],
-                                    "subFlowData": null
-                                }
-                            ]
-                        ]
+                        subFlowData: item.subFlowData || []
                     }
                     this.nodes.push(node);
                 });
